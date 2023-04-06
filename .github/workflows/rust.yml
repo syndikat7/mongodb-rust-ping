@@ -38,4 +38,4 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: ${{ ARCHIVE_NAME }}
+        files: ${{ env.ARCHIVE_NAME }}
