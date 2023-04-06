@@ -9,6 +9,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    container: quay.io/pypa/manylinux2014_x86_64
 
     steps:
     - uses: actions/checkout@v3
@@ -18,14 +19,24 @@ jobs:
         profile: minimal
         toolchain: stable
         override: true
-        target: x86_64-unknown-linux-musl
+    - name: Set env on push
+      if: github.event_name == 'push'
+      run: |
+        echo "INPUT_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
+        echo "INPUT_TAG=$(git tag --points-at HEAD)" >> $GITHUB_ENV
     - name: Build
       uses: actions-rs/cargo@v1
       with:
         command: build
-        args: --release --target x86_64-unknown-linux-musl
+        args: --release
+    - name: Prepare archive
+      run: |
+        strip target/release/mongodb-rust-ping
+        export ARCHIVE_NAME=mongodb-rust-ping-${{ env.INPUT_TAG }}-linux-x64.tar.gz
+        echo "ARCHIVE_NAME=$ARCHIVE_NAME" >> $GITHUB_ENV
+        tar -czvf $ARCHIVE_NAME -C target/release mongodb-rust-ping
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: target/release/mongodb-rust-ping
+        files: ${{ env.ARCHIVE_NAME }}
