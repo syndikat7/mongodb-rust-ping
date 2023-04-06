@@ -1,0 +1,16 @@
+[package]
+name = "mongodb-rust-ping"
+version = "0.1.0"
+edition = "2021"
+authors = ["SYNDIKAT7 GmbH <hello@syndikat7.de>"]
+license = "MIT"
+description = "A tool to ping mongodb"
+readme = "README.md"
+homepage = "https://github.com/syndikat7/mongodb-rust-ping"
+repository = "https://github.com/syndikat7/mongodb-rust-ping"
+keywords = ["cli", "mongodb", "ping"]
+categories = ["command-line-utilities"]
+
+[dependencies]
+tokio = { version = "1.27.0", features = ["full"] }
+mongodb = { version = "2.3.0", features = ["tokio-sync"] }
