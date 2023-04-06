@@ -1,7 +1,13 @@
 use mongodb::{bson::doc, sync::Client};
+use std::env;
 fn main() -> mongodb::error::Result<()> {
-    // Replace the placeholder with your Atlas connection string
-    let uri = "mongodb://localhost:27017";
+    let port = env::var("MONGODB_PORT_NUMBER");
+    if port.is_err(){
+      println!("MONGODB_PORT_NUMBER MISSING!");
+      std::process::exit(1);
+    }
+    let uri = format!("mongodb://localhost:{}", port.unwrap());
+
     // Create a new client and connect to the server
     let client = Client::with_uri_str(uri)?;
     // Send a ping to confirm a successful connection
