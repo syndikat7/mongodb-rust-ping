@@ -41,7 +41,7 @@ fn main() -> mongodb::error::Result<()> {
 
     // Establish connection
     let uport = port.unwrap();
-    let uri = format!("mongodb://127.0.0.1:{}/?{}", uport, , uri_options);
+    let uri = format!("mongodb://127.0.0.1:{}/?{}", uport, uri_options);
 
     println!("Connecting to {}", uri);
 
