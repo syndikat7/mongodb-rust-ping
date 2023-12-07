@@ -36,10 +36,13 @@ fn main() -> mongodb::error::Result<()> {
         println!("MONGODB_PORT_NUMBER MISSING!");
         std::process::exit(1);
     }
+  
+    let uri_options = env::var("MONGODB_URI_OPTIONS").unwrap_or("".to_string());
 
     // Establish connection
     let uport = port.unwrap();
-    let uri = format!("mongodb://127.0.0.1:{}", uport);
+    let uri = format!("mongodb://127.0.0.1:{}/?{}", uport, , uri_options);
+
     println!("Connecting to {}", uri);
 
     // Create a new client and connect to the server
