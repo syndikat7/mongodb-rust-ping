@@ -52,7 +52,6 @@ extraVolumes:
       sizeLimit: 100Mi
 
 ```
-My repo now 
 
 ## License - MIT
 
