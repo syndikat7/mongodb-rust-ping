@@ -1,4 +1,4 @@
-name: Rust
+name: Rust Macos
 
 on: push
 
@@ -11,6 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: macos-latest
+    container: quay.io/pypa/manylinux_2_28_x86_64
 
     steps:
     - uses: actions/checkout@v3
@@ -24,7 +25,7 @@ jobs:
       run: |
         SDKROOT=$(xcrun -sdk macosx --show-sdk-path) 
         MACOSX_DEPLOYMENT_TARGET=$(xcrun -sdk macosx --show-sdk-platform-version) 
-        cargo build --target=aarch64-apple-darwin
+        cargo build --target=aarch64-apple-darwin --release
     - name: Prepare archive
       run: |
         strip target/release/mongodb-rust-ping
