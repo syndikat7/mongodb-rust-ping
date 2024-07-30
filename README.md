@@ -24,6 +24,19 @@ customLivenessProbe:
   exec:
     command:
       - /custom-scripts/mongodb-rust-ping
+      - --ping
+      # You can choose between --ping and --hello , ping executes a ping command, while hello checks if it is primary and writeable or secondary
+
+customReadinessProbe:
+  initialDelaySeconds: 5
+  timeoutSeconds: 10
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 6
+  exec:
+    command:
+      - /custom-scripts/mongodb-rust-ping
+      - --hello
 
 initContainers:
   - name: download-ping-tool
@@ -35,7 +48,7 @@ initContainers:
       - |
         #!/usr/bin/env bash -e
         wget -O /custom-scripts/mongodb-rust-ping.tar.gz  \
-        "https://github.com/syndikat7/mongodb-rust-ping/releases/download/v0.2.1/mongodb-rust-ping-linux-x64.tar.gz"
+        "https://github.com/syndikat7/mongodb-rust-ping/releases/download/v0.3.1/mongodb-rust-ping-linux-x64.tar.gz"
         cd /custom-scripts/ && tar -xzvf mongodb-rust-ping.tar.gz   
         chmod +x /custom-scripts/mongodb-rust-ping
     volumeMounts:
