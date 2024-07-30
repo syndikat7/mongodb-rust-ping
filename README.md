@@ -25,7 +25,8 @@ customLivenessProbe:
     command:
       - /custom-scripts/mongodb-rust-ping
       - --ping
-      # You can choose between --ping and --hello , ping executes a ping command, while hello checks if it is primary and writeable or secondary
+      # You can choose between --ping and --hello , ping executes a ping command, 
+      # while hello checks if it is primary and writeable or secondary
 
 customReadinessProbe:
   initialDelaySeconds: 5
