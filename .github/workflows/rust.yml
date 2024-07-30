@@ -10,7 +10,6 @@ permissions:
   
 jobs:
   build:
-
     runs-on: ubuntu-latest
     container: quay.io/pypa/manylinux_2_28_x86_64
 
