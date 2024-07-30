@@ -1,4 +1,4 @@
-name: Rust Macos
+name: Rust aarch64-apple-darwin
 
 on: push
 
