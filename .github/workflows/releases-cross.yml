@@ -45,7 +45,7 @@ jobs:
 
       - name: Prepare archive
         run: |
-          strip target/${{ matrix.target }}/release/mongodb-rust-ping
+          strip --target ${{ matrix.target }} target/${{ matrix.target }}/release/mongodb-rust-ping
           export ARCHIVE_NAME=mongodb-rust-ping-${{ matrix.target }}.tar.gz
           echo "ARCHIVE_NAME=$ARCHIVE_NAME" >> $GITHUB_ENV
           tar -czvf $ARCHIVE_NAME -C target/${{ matrix.target }}/release mongodb-rust-ping
