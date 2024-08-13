@@ -15,3 +15,7 @@ categories = ["command-line-utilities"]
 tokio = { version = "1.27.0", features = ["full"] }
 mongodb = { version = "2.3.0", features = ["tokio-sync"] }
 getopts = "0.2"
+
+[profile.release]
+panic = "abort"
+strip = true
