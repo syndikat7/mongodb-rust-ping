@@ -20,11 +20,11 @@ jobs:
           - name: macos-amd64
             runner: macos-latest
             target: x86_64-apple-darwin
-            command: cross
+            command: cargo
           - name: macos-arm64
             runner: macos-latest
             target: aarch64-apple-darwin
-            command: cross
+            command: cargo
 
     steps:
       - name: Checkout
